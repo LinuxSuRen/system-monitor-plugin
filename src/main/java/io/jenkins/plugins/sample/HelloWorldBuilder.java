@@ -14,6 +14,11 @@ import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
+
 import jenkins.tasks.SimpleBuildStep;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundSetter;
@@ -48,6 +53,16 @@ public class HelloWorldBuilder extends Builder implements SimpleBuildStep {
         } else {
             listener.getLogger().println("Hello, " + name + "!");
         }
+
+
+        MemoryMXBean memBean = ManagementFactory.getMemoryMXBean();
+
+        MemoryUsage heapUsage = memBean.getHeapMemoryUsage();
+        MemoryUsage nonHeapUsage = memBean.getNonHeapMemoryUsage();
+
+        PrintStream logger = listener.getLogger();
+
+        logger.println("max:" + heapUsage.getMax() + "; used:" + heapUsage.getUsed());
     }
 
     @Symbol("greet")
