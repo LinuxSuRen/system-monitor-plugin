@@ -1,0 +1,12 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+<l:pane width="2" title="${%System Performance}">
+  <table>
+  <j:forEach var="entry" items="${it.memHuman}">
+    <tr>
+        <td>${entry.key}</td><td>${entry.value}</td>
+    </tr>
+  </j:forEach>
+  </table>
+</l:pane>
+</j:jelly>
